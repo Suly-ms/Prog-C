@@ -1,9 +1,11 @@
+#include <string.h>
 #include "scanp.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
+#include <netdb.h>
 
 void printfp_open(int port) {
     printf("Open port : %d\n", port);
@@ -22,10 +24,14 @@ int main(int argc, char *argv[]) {
     char *ip = argv[1];
     int port_start = atoi(argv[2]);
     int port_end = atoi(argv[3]);
-
-    int sockfd, result;
+    int sockfd, result, status;
     struct sockaddr_in sr_addr;
+    struct addrinfo filtre, *serviceinfo;
 
+    memset(&filtre, 0, sizeof(filtre));
+    filtre.ai_family = AF_UNSPEC;
+    filtre.ai_socktype = SOCK_STREAM;
+    
     sr_addr.sin_family = AF_INET;
     sr_addr.sin_addr.s_addr = inet_addr(ip);
 
@@ -35,6 +41,11 @@ int main(int argc, char *argv[]) {
     }
 
     for(int i = port_start; i<port_end; i++) {
+        if ((status = getaddrinfo(ip, i, &filtre, &serviceinfo)) != 0) {
+            fprintf(stderr, "gai error: %s\n", gai_strerror(status));
+            exit(1);
+        }
+
         sr_addr.sin_port = htons(i);
         sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
