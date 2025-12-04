@@ -41,7 +41,9 @@ int main(int argc, char *argv[]) {
     }
 
     for(int i = port_start; i<port_end; i++) {
-        if ((status = getaddrinfo(ip, i, &filtre, &serviceinfo)) != 0) {
+        char i_str[port_end];
+        sprintf(i_str, "%d", i);
+        if ((status = getaddrinfo(ip, i_str, &filtre, &serviceinfo)) != 0) {
             fprintf(stderr, "gai error: %s\n", gai_strerror(status));
             exit(1);
         }
