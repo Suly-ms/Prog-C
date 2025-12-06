@@ -1,9 +1,11 @@
+#include <string.h>
 #include "scanp.h"
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/socket.h>
+#include <netdb.h>
 
 void printfp_open(int port) {
     printf("Open port : %d\n", port);
@@ -22,38 +24,33 @@ int main(int argc, char *argv[]) {
     char *ip = argv[1];
     int port_start = atoi(argv[2]);
     int port_end = atoi(argv[3]);
+    int sockfd, status;
+    struct addrinfo filtre, *serviceinfo;
 
-    int sockfd, result;
-    struct sockaddr_in sr_addr;
-
-    sr_addr.sin_family = AF_INET;
-    sr_addr.sin_addr.s_addr = inet_addr(ip);
-
-    if (inet_pton(AF_INET, ip, &(sr_addr.sin_addr)) <= 0) {
-        perror("Invalid IP address");
-        exit(EXIT_FAILURE);
-    }
+    memset(&filtre, 0, sizeof(filtre));
+    filtre.ai_family = AF_UNSPEC;
+    filtre.ai_socktype = SOCK_STREAM;
 
     for(int i = port_start; i<port_end; i++) {
-        sr_addr.sin_port = htons(i);
-        sockfd = socket(AF_INET, SOCK_STREAM, 0);
+        char i_str[16];
+        snprintf(i_str, sizeof(i_str), "%d", i);
+        if ((status = getaddrinfo(ip, i_str, &filtre, &serviceinfo)) != 0) {
+            fprintf(stderr, "gai error: %s\n", gai_strerror(status));
+            exit(EXIT_FAILURE);
+        }
 
-        if (sockfd < 0) {
+        if ((sockfd = socket(serviceinfo->ai_family, serviceinfo->ai_socktype, 0)) == -1) {
             perror("Socket creation failed");
             continue;
         }
         
-        result = connect(sockfd, (struct sockaddr *)&sr_addr, sizeof(sr_addr));
-
-        if(result == 0) {
+        if(connect(sockfd, serviceinfo->ai_addr, serviceinfo->ai_addrlen)==0) {
             printfp_open(i);
         }
-        /*
-        else {
-            printfp_close(i);
-        }*/
 
         close(sockfd);
+
+        freeaddrinfo(serviceinfo);
     }
 
     return EXIT_SUCCESS;
