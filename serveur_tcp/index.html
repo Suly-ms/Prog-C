@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Langage C</title>
+    <style>
+        /* Reset et base */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: #007acc;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        /* Sections */
+        section {
+            background-color: #252526;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        h2 {
+            color: #4ec9b0;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* Code Block */
+        .code-block {
+            background-color: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            overflow-x: auto;
+            color: #9cdcfe;
+        }
+
+        .keyword { color: #569cd6; }
+        .string { color: #ce9178; }
+        .function { color: #dcdcaa; }
+
+        /* Listes */
+        ul {
+            list-style-position: inside;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Le Langage C</h1>
+        <p>Performance, Puissance et Contrôle</p>
+    </header>
+
+    <div class="container">
+        
+        <section>
+            <h2>C'est quoi le C ?</h2>
+            <p>
+                Le C est un langage de programmation impératif, généraliste et de bas niveau. 
+                Inventé au début des années 70 par <strong>Dennis Ritchie</strong> aux laboratoires Bell, 
+                il est devenu l'un des langages les plus utilisés de tous les temps.
+            </p>
+            <p>
+                Il est célèbre pour son efficacité et son contrôle absolu sur la mémoire via les pointeurs.
+            </p>
+        </section>
+
+        <section>
+            <h2>Exemple : Hello World</h2>
+            <p>Voici la structure minimale d'un programme en C :</p>
+            <div class="code-block">
+                <span class="keyword">#include</span> &lt;stdio.h&gt;<br><br>
+                <span class="keyword">int</span> <span class="function">main</span>() {<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">printf</span>(<span class="string">"Bonjour, le monde !\n"</span>);<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> 0;<br>
+                }
+            </div>
+        </section>
+
+        <section>
+            <h2>Pourquoi utiliser le C ?</h2>
+            <ul>
+                <li>⚡ <strong>Performance :</strong> Proche du langage machine, il est extrêmement rapide.</li>
+                <li>💾 <strong>Mémoire :</strong> Gestion manuelle de la mémoire (malloc/free).</li>
+                <li>🌍 <strong>Portabilité :</strong> Un code C standard compile sur presque toutes les machines.</li>
+                <li>🐧 <strong>Système :</strong> Linux, Windows et macOS sont écrits majoritairement en C.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Test d'image</h2>
+            <p>Si ton serveur gère les images, tu devrais voir un logo ci-dessous (si le fichier <code>logo.png</code> existe).</p>
+            <img src="logo.png" alt="Logo C (Test 404 si absent)" style="max-width: 100%; border: 1px solid #444;">
+        </section>
+
+    </div>
+
+    <footer>
+        <p>Généré pour tester un serveur HTTP en C &bull; 2023</p>
+    </footer>
+
+</body>
+</html>
