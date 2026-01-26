@@ -1,12 +1,12 @@
 # Prog-C
 Divers programmes en C développés par ma personne
 
-Comment lancer le programme ?
+Comment lancer un des programmes ?
 
-1. Compiler à l'aide de la commande make
-2. Aller dans out/
-3. Executer le scanp de la manière suivante : ./scanp IP PORT_START PORT_END
-4. Executer le serveur tcp de la manière suivante : ./server_tcp PORT
+1. Aller dans le dossier du programme voulu
+2. Compiler à l'aide de la commande make
+3. Aller dans out/ OU directement à la racine du programme
+5. Executer le binaire et le tour est joué !
 
 Comment nettoyer facilement le répertoire ?
 
